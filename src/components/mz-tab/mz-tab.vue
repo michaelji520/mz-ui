@@ -8,7 +8,7 @@
   <div class="mz-tab" ref="tabWrapper">
     <div class="header">
       <h2 class="title" v-if="title">{{ title }}</h2>
-      <div class="zyb-tabs" v-if="tabs && tabs.length">
+      <div class="tabs-bar" v-if="tabs && tabs.length">
         <div class="move-bar"></div>
         <ul ref="tabs">
           <li
@@ -145,7 +145,7 @@ export default {
       align-items: center;
     }
   }
-  .zyb-tabs {
+  .tabs-bar {
     display: inline-block;
     position: relative;
     margin-left: 16px;

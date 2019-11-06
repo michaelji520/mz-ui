@@ -8,17 +8,24 @@
           <div tab-name="second">456</div>
         </mz-tab>
       </div>
+      <div class="component-wrapper">
+        <div class="img-wrapper">
+          <img @click="viewerVisible = !viewerVisible" src="https://static.zhangji.xyz/FsXIbP9YH809wcFKjcLvT1TYvKXN" alt="">
+        </div>
+        <mz-viewer :current="currentImgIndex" :list="imgSrcList" :visible.sync="viewerVisible"></mz-viewer>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import MzTab from './components/mz-tab/mz-tab';
+import MzViewer from './components/mz-viewer/mz-viewer';
 
 export default {
   name: 'app',
   components: {
-    MzTab
+    MzTab, MzViewer
   },
   data() {
     return {
@@ -32,7 +39,10 @@ export default {
           label: 'tab 2',
           value: 'second'
         }
-      ]
+      ],
+      currentImgIndex: 0,
+      imgSrcList: ['https://static.zhangji.xyz/FsXIbP9YH809wcFKjcLvT1TYvKXN'],
+      viewerVisible: false
     }
   }
 }
