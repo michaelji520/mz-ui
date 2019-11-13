@@ -11,6 +11,7 @@
       <div class="component-wrapper">
         <div class="img-wrapper">
           <img @click="viewerVisible = !viewerVisible" src="https://static.zhangji.xyz/FsXIbP9YH809wcFKjcLvT1TYvKXN" alt="">
+          <img @click="viewerVisible = !viewerVisible" src="https://static.zhangji.xyz/FsXIbP9YH809wcFKjcLvT1TYvKXN" alt="">
         </div>
         <mz-viewer :current="currentImgIndex" :list="imgSrcList" :visible.sync="viewerVisible"></mz-viewer>
       </div>
@@ -72,10 +73,15 @@ export default {
     padding: 24px 48px;
     background: #F0F1F2;
   }
-}
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+  .img-wrapper {
+    height: 100px;
+    background: #FFF;
+    img {
+      max-height: 100%;
+      &+img {
+        margin-left: 8px;
+      }
+    }
+  }
 }
 </style>

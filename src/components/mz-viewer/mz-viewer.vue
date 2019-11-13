@@ -1,12 +1,12 @@
 <template>
   <div :class="{'mz-viewer': true, 'hide': !visible}">
-    <i class="iconfont icon-error-circle-o close-btn" @click="closeViewer"></i>
+    <i class="icon-cancel close-btn" @click="closeViewer"></i>
     <img :src="list[innerIndex]" @mousedown.stop.prevent="move"/>
     <div class="tool-bar">
-      <i @click="changeImg(-1)" class="iconfont icon-arrowLeft-o1"></i>
-      <i>{{ `${innerIndex + 1}/${list.length}` }}</i>
-      <i @click="changeImg(1)" class="iconfont icon-arrowRight-o1"></i>
-      <i @click="reset" class="iconfont icon-self-adaption-o"></i>
+      <i @click="changeImg(-1)" class="icon-left-open-big"></i>
+      <span>{{ `${innerIndex + 1}/${list.length}` }}</span>
+      <i @click="changeImg(1)" class="icon-right-open-big"></i>
+      <i @click="reset" class="icon-doc"></i>
       <i @click="scale += 0.05" class="iconfont icon-magnify-o"></i>
       <i @click="scaleImage(-0.05)" class="iconfont icon-shrink-o"></i>
       <i @click="rotate -= 90" class="iconfont icon-redo"></i>
@@ -169,7 +169,7 @@ export default {
   overflow: auto;
   margin: 0;
   z-index: 2000;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   overflow: hidden;
   img {
     transform: scale(1) rotate(0deg);
@@ -187,18 +187,21 @@ export default {
     box-sizing: border-box;
     padding: 0 16px;
     margin: auto 0;
-    bottom: 100px;
+    bottom: 10%;
     color: #fff;
     z-index: 1;
     width: 438px;
     height: 40px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
     border-radius: 4px;
-  }
-  .iconfont {
-    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    i {
+      cursor: pointer;
+    }
   }
   .close-btn {
+    cursor: pointer;
     position: absolute;
     right: 16px;
     top: 16px;
@@ -207,7 +210,7 @@ export default {
     z-index: 1;
     box-shadow: 0px 0px 8px 1px #83868f;
     border-radius: 50%;
-    background: rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.25);
   }
 }
 .hide {
