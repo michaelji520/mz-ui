@@ -77,7 +77,7 @@ export default {
     // 设置当前激活的标签样式
     setCurrentTab() {
       if (this.tabs && this.tabs.length && this.$refs.tabWrapper && this.$refs.tabs) {
-        let activeBar = this.$refs.tabWrapper.querySelector('.zyb-tabs .move-bar');
+        let activeBar = this.$refs.tabWrapper.querySelector('.tabs-bar .move-bar');
         let tabs = this.$refs.tabs;
         let activeNav = tabs.querySelector('li.is-active') || tabs.querySelector('li:first-child');
         activeBar.style.width = (activeNav.clientWidth || 0) + 'px';
@@ -91,7 +91,7 @@ export default {
       if (tab.value === this.value) {
         return;
       }
-      let activeBar = this.$refs.tabWrapper.querySelector('.zyb-tabs .move-bar');
+      let activeBar = this.$refs.tabWrapper.querySelector('.tabs-bar .move-bar');
       activeBar.style.width = evt.target.clientWidth + 'px';
       activeBar.style.transform = `translateX(${evt.target.offsetLeft}px)`;
       this.$emit('input', tab.value);

@@ -65,6 +65,7 @@ export default {
     flex-wrap: wrap;
     width: calc(100% - 160px);
     overflow: auto;
+    flex-direction: column;
   }
   .component-wrapper {
     width: 100%;
@@ -72,6 +73,9 @@ export default {
     flex-shrink: 0;
     padding: 24px 48px;
     background: #F0F1F2;
+    &+.component-wrapper {
+      margin-top: 16px;
+    }
   }
   .img-wrapper {
     height: 100px;

@@ -1,0 +1,33 @@
+@font-face {font-family: "mz-icon";
+  src: url('//at.alicdn.com/t/font_1510462_1w78kq29mde.eot?t=1573809760583'); /* IE9 */
+  src: url('//at.alicdn.com/t/font_1510462_1w78kq29mde.eot?t=1573809760583#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAASIAAsAAAAACXAAAAQ7AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDGgqGGIUmATYCJAMUCwwABCAFhGEHYRsnCFGULkqC7KfGzrQoQ3EUBxugR90B+LABAFSADW74fgEQIvh+v9+e+wSV5N5Fp5t0SBA6oUHphERIhKShiEVN/97p79iljK3J892KvdR0K00v7U7fNX8qEAaHcijxhWIKzU92+W9uJjK6FFW8COivufJ2A6L8oGKUn1hwyLlcD9YWMCTQH/eqZr3zH6AN4HvRHIPiAQ4F52439iq+QSrqVYCdLeFP4MMEavWwDG2cXN2CIaeuC8RZGnMwIkp5ARKqJWXG0RziCpRUJ4XsBYBL5/fjA4IwQFJkoD5q8/Q4gr3nOCaYShSSsheg3anAniLDFJATx5maXSOeZ8qIWtkzagxMa17wTCSJZ2QxJ/sPj5BkcqIEVVgPWPHmPCNDwBHJIAARhgBEBOyLISysI7VowjdxCKq4y7kmU8pkWyw0NXV19dTUdLWMLfWPppXLdArzchOe65YviEYs3yPOUUOG7Rq8YBy3ssIvL3OLi8zSErt8zK2c8EtH7OLhKaETStqloSf2IBV5t3qJ3sWbVsqDNwJ1L92yVhm5HR/aOd0/YML3zEGis8K8Md83Jy7I54VZxnXxk/MjLrmImazzBoRLPVbWueVdZnGVXdrj2a46LmPuzaJ63/QR0HEPuhiingVxDmh0zdFZdXXoVI7URz7sgkldflVGqFVvuqYw/z86La3XzN5MkaYuyOgz9zfrS0vPSE/IMjK8qS/aXZ+ned8kf/+SmxrNoptFQRBrxNaWgLdG0cGlJoIqNlK7rgbGCimMr4QBS77O1Q9S+aD2cu0j1u3HuxZOS89CT/O8FLWOGqrOBNejDvRI6MsplS+OBlMCwWlerWUPDwe2eIWmeUFBaaYFLsrNLcIWmaV4lbnmw/i2VoW5vXlva5uhY82BfpCPxxfxhY8fL9hzPnwkF8ID397/FAxjns3yAZA8n8XP5NkAB+1GrE5Lb2DU5h+vzC7AGkBlHi9jDqDyAl9w2Fd5yde9C0+rs/VvaJzakaevLWnkwgolkF0AqJZEbfANsSo25QpHlRQ3oMRYIFDYMQ5XQq1mpwKqodVnN+KOyrGEKh0BOkEXOoNBdA4T1EKdeX4pwwK11qTD03XaVEZErgZMeAU1NLpGJ7hBZ3CLzuGOWuj0xy8B/9Ra+zFxZZ2ReDAPCbnGiIU9lgpVSd2tzbJvk7HXGLcKThzbJtwjNamN+Y6X8J9ihdR8S9OOA60lk6RKdkI8UmNRKFaTylBoJ9G63nBdmfVOjlAlmNYRxGkowoR6mJSgVKRVqJnO9dn4uWso1lLgKLtMJPQeIg3HwHiMz+EVo0+FVZWyU0httMUCWlNJzMglSok5mZQKFaRHYepsfkZGCpojaeCqbXCpdrKq0BlWXJ5d1ntcUX2jImQII4KUkDI0nhApskVKokBbzTVYSJtHvNY7cldbTZY8rlLZs5XRJJRWua0AAAA=') format('woff2'),
+  url('//at.alicdn.com/t/font_1510462_1w78kq29mde.woff?t=1573809760583') format('woff'),
+  url('//at.alicdn.com/t/font_1510462_1w78kq29mde.ttf?t=1573809760583') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('//at.alicdn.com/t/font_1510462_1w78kq29mde.svg?t=1573809760583#mz-icon') format('svg'); /* iOS 4.1- */
+}
+
+.mz-icon {
+  font-family: "mz-icon" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.error-circle-o:before {
+  content: "\e601";
+}
+
+.self-adaption-o:before {
+  content: "\e602";
+}
+
+.magnify-o:before {
+  content: "\e603";
+}
+
+.shrink-o:before {
+  content: "\e604";
+}
+

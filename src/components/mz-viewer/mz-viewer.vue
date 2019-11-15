@@ -1,16 +1,16 @@
 <template>
   <div :class="{'mz-viewer': true, 'hide': !visible}">
-    <i class="icon-cancel close-btn" @click="closeViewer"></i>
+    <i class="mz-icon error-circle-o close-btn" @click="closeViewer"></i>
     <img :src="list[innerIndex]" @mousedown.stop.prevent="move"/>
     <div class="tool-bar">
       <i @click="changeImg(-1)" class="icon-left-open-big"></i>
       <span>{{ `${innerIndex + 1}/${list.length}` }}</span>
-      <i @click="changeImg(1)" class="icon-right-open-big"></i>
+      <i @click="changeImg(1)" class="mz-icon icon-right-open-big"></i>
       <i @click="reset" class="icon-doc"></i>
-      <i @click="scale += 0.05" class="iconfont icon-magnify-o"></i>
-      <i @click="scaleImage(-0.05)" class="iconfont icon-shrink-o"></i>
-      <i @click="rotate -= 90" class="iconfont icon-redo"></i>
-      <i @click="rotate += 90" class="iconfont icon-undo"></i>
+      <i @click="scale += 0.05" class="mz-icon magnify-o"></i>
+      <i @click="scaleImage(-0.05)" class="mz-icon shrink-o"></i>
+      <i @click="rotate -= 90" class="mz-icon icon-redo"></i>
+      <i @click="rotate += 90" class="mz-icon icon-undo"></i>
     </div>
   </div>
 </template>

@@ -5,7 +5,7 @@ import App from './App.vue'
 import './common/reset.less';
 
 // import icon font
-import './assets/fonts/entypo/entypo.css';
+import './assets/fonts/font_1510462_1w78kq29mde.css';
 
 Vue.config.productionTip = false
 
