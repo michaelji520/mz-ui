@@ -7,8 +7,8 @@
       <span>{{ `${innerIndex + 1}/${list.length}` }}</span>
       <i @click="changeImg(1)" class="mz-icon arrowRight-o"></i>
       <i @click="reset" class="mz-icon self-adaption-o"></i>
-      <i @click="scaleImage(0.05)" class="mz-icon magnify-o"></i>
-      <i @click="scaleImage(-0.05)" class="mz-icon shrink-o"></i>
+      <i @click="scaleImage(scaleRatio)" class="mz-icon magnify-o"></i>
+      <i @click="scaleImage(-scaleRatio)" class="mz-icon shrink-o"></i>
       <i @click="rotateImage(-90)" class="mz-icon redo"></i>
       <i @click="rotateImage(90)" class="mz-icon undo"></i>
     </div>
@@ -35,7 +35,7 @@ export default {
     visible: {
       type: Boolean,
       default: false
-    }
+    },
   },
   data () {
     return {
@@ -46,7 +46,9 @@ export default {
       translateX: 0,
       translateY: 0,
       deltaX: 0,
-      deltaY: 0
+      deltaY: 0,
+      // image scale ratio of each zoom
+      scaleRatio: 0.02
     };
   },
   watch: {
@@ -66,19 +68,52 @@ export default {
   },
   mounted() {
     this.innerIndex = this.current;
-    window.addEventListener('mousewheel', rafThrottle((e) => {
-      if (e.wheelDeltaY > 0) {
-        this.scale += 0.02;
-      } else if (this.scale > 0.2) {
-        this.scale -= 0.02;
-      }
-    }));
+    this.deviceSupportInstall();
     const dom = document.querySelector('.mz-viewer > img');
     dom.onload = (e) => {
       dom.style.visibility = 'visible';
     };
   },
   methods: {
+    // add support for mouse wheel & arrow keys
+    deviceSupportInstall() {
+      this._mouseWheelHandler = rafThrottle((e) => {
+        if (e && e.wheelDeltaY > 0) {
+          this.scale += this.scaleRatio;
+        } else if (this.scale > 0.2) {
+          this.scale -= this.scaleRatio;
+        }
+      });
+      window.addEventListener('mousewheel', this._mouseWheelHandler);
+      this._keyDownHandler = rafThrottle((e) => {
+        const code = e.keyCode;
+        switch (code) {
+          // ESC
+          case 27:
+            this.closeViewer()
+            break;
+          // LEFT ARROW
+          case 37:
+            this.changeImg(-1);
+            break;
+          // UP ARROW
+          case 38:
+            this.scaleImage(this.scaleRatio);
+            break;
+          case 39:
+            this.changeImg(1);
+            break;
+          case 40:
+            this.scaleImage(-this.scaleRatio);
+            break;
+        }
+      });
+      window.addEventListener('keydown', this._keyDownHandler);
+    },
+    deviceSupportUninstall() {
+      window.removeEventListener('mousewheel', this._mouseWheelHandler);
+      window.removeEventListener('keydown', this._keyDownHandler);
+    },
     rotateImage(val) {
       this.rotate += val;
     },
@@ -90,8 +125,6 @@ export default {
       }
     },
     move(e) {
-      const odiv = e.target; // 获取目标元素
-
       // 算出鼠标相对元素的位置
       const disX = e.clientX;
       const disY = e.clientY;
@@ -138,6 +171,7 @@ export default {
       this.deltaY = 0;
     },
     closeViewer() {
+      this.deviceSupportUninstall();
       this.reset();
       this.$emit('update:visible', false);
     }
@@ -146,7 +180,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-@-webkit-keyframes fadeIn {
+@keyframes fadeIn {
   0% {
     opacity: 0;
   }
