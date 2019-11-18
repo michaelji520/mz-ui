@@ -42,7 +42,7 @@ export default {
         }
       ],
       currentImgIndex: 0,
-      imgSrcList: ['https://static.zhangji.xyz/FsXIbP9YH809wcFKjcLvT1TYvKXN'],
+      imgSrcList: ['https://static.zhangji.xyz/FsXIbP9YH809wcFKjcLvT1TYvKXN', 'https://static.zhangji.xyz/FqOUEtt6RZYuEQePwuarzpT8HIKh'],
       viewerVisible: false
     }
   }

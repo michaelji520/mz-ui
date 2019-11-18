@@ -1,33 +1,37 @@
 <template>
   <div :class="{'mz-viewer': true, 'hide': !visible}">
     <i class="mz-icon error-circle-o close-btn" @click="closeViewer"></i>
-    <img :src="list[innerIndex]" @mousedown.stop.prevent="move"/>
+    <img :src="list[innerIndex]" @mousedown.stop.prevent="move" :style="imgStyle" alt="loading image"/>
     <div class="tool-bar">
-      <i @click="changeImg(-1)" class="icon-left-open-big"></i>
+      <i @click="changeImg(-1)" class="mz-icon arrowLeft-o"></i>
       <span>{{ `${innerIndex + 1}/${list.length}` }}</span>
-      <i @click="changeImg(1)" class="mz-icon icon-right-open-big"></i>
-      <i @click="reset" class="icon-doc"></i>
-      <i @click="scale += 0.05" class="mz-icon magnify-o"></i>
+      <i @click="changeImg(1)" class="mz-icon arrowRight-o"></i>
+      <i @click="reset" class="mz-icon self-adaption-o"></i>
+      <i @click="scaleImage(0.05)" class="mz-icon magnify-o"></i>
       <i @click="scaleImage(-0.05)" class="mz-icon shrink-o"></i>
-      <i @click="rotate -= 90" class="mz-icon icon-redo"></i>
-      <i @click="rotate += 90" class="mz-icon icon-undo"></i>
+      <i @click="rotateImage(-90)" class="mz-icon redo"></i>
+      <i @click="rotateImage(90)" class="mz-icon undo"></i>
     </div>
   </div>
 </template>
 
 <script>
+import { rafThrottle } from '@/common/util';
 
 export default {
   name: 'mz-viewer',
   props: {
+    // default display image index
     current: {
       type: Number,
       default: 0
     },
+    // image list
     list: {
       type: Array,
       default: []
     },
+    // viewer visible flag
     visible: {
       type: Boolean,
       default: false
@@ -35,6 +39,7 @@ export default {
   },
   data () {
     return {
+      // image index of img viewer
       innerIndex: -1,
       scale: 1,
       rotate: 0,
@@ -48,53 +53,41 @@ export default {
     current(val) {
       this.reset();
       this.innerIndex = val;
-    },
-    scale(val) {
-      this.setElementStyle();
-    },
-    rotate(val) {
-      this.setElementStyle();
-    },
-    deltaX(val) {
-      this.setElementStyle();
-    },
-    deltaY(val) {
-      this.setElementStyle();
-    },
-    translateX(val) {
-      this.setElementStyle();
-    },
-    translateY(val) {
-      this.setElementStyle();
+    }
+  },
+  computed: {
+    imgStyle() {
+      return {
+        transform: `scale(${this.scale}) rotate(${this.rotate}deg)`,
+        marginLeft: `${(this.translateX + this.deltaX) * 2}px`,
+        marginTop: `${(this.translateY + this.deltaY) * 2}px`
+      }
     }
   },
   mounted() {
     this.innerIndex = this.current;
-    window.addEventListener('mousewheel', (e) => {
+    window.addEventListener('mousewheel', rafThrottle((e) => {
       if (e.wheelDeltaY > 0) {
-        this.scale += 0.05;
+        this.scale += 0.02;
       } else if (this.scale > 0.2) {
-        this.scale -= 0.05;
+        this.scale -= 0.02;
       }
-    });
+    }));
     const dom = document.querySelector('.mz-viewer > img');
     dom.onload = (e) => {
       dom.style.visibility = 'visible';
     };
   },
   methods: {
+    rotateImage(val) {
+      this.rotate += val;
+    },
     scaleImage(val) {
       if (val <= 0 && this.scale <= 0.2) {
         return;
       } else {
         this.scale += val;
       }
-    },
-    setElementStyle() {
-      const dom = document.querySelector('.mz-viewer > img');
-      dom.style.transform = `rotate(${this.rotate}deg) scale(${this.scale})`;
-      dom.style.marginLeft = `${(this.translateX + this.deltaX) * 2}px`;
-      dom.style.marginTop = `${(this.translateY + this.deltaY) * 2}px`;
     },
     move(e) {
       const odiv = e.target; // 获取目标元素
@@ -111,9 +104,6 @@ export default {
         // 绑定元素位置到positionX和positionY上面
         this.deltaY = top;
         this.deltaX = left;
-
-        // 移动当前元素
-        // this.setElementStyle()
       };
       document.onmouseup = (e) => {
         this.translateX += this.deltaX;
@@ -133,12 +123,11 @@ export default {
       if (temp > this.list.length - 1) {
         temp = 0;
       }
-      this.innerIndex = temp;
-      const dom = document.querySelector('.mz-viewer > img');
-      dom.style.visibility = 'hidden';
-      setTimeout(() => {
-        this.setElementStyle();
-      }, 100);
+      if(this.innerIndex !== temp) {
+        this.innerIndex = temp;
+        const dom = document.querySelector('.mz-viewer > img');
+        dom.style.visibility = 'hidden';
+      }
     },
     reset() {
       this.scale = 1;
@@ -157,7 +146,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .mz-viewer {
+  -webkit-animation-name: fadeIn;
+  -webkit-animation-duration: .3s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-delay: 0s;
   position: fixed;
   display: flex;
   justify-content: center;
@@ -175,8 +176,8 @@ export default {
     transform: scale(1) rotate(0deg);
     margin-left: 0px;
     margin-top: 0px;
-    max-height: 90%;
-    max-width: 90%;
+    max-height: 100%;
+    max-width: 100%;
     transition: transform 0.2s ease 0s;
   }
   .tool-bar {
@@ -192,10 +193,11 @@ export default {
     z-index: 1;
     width: 438px;
     height: 40px;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
     font-size: 14px;
     line-height: 1;
+    box-shadow: 0px 0px 8px 1px #333;
     i {
       cursor: pointer;
     }
