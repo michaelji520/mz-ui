@@ -74,6 +74,9 @@ export default {
       dom.style.visibility = 'visible';
     };
   },
+  beforeDestory() {
+    this.deviceSupportUninstall();
+  },
   methods: {
     // add support for mouse wheel & arrow keys
     deviceSupportInstall() {
@@ -171,7 +174,6 @@ export default {
       this.deltaY = 0;
     },
     closeViewer() {
-      this.deviceSupportUninstall();
       this.reset();
       this.$emit('update:visible', false);
     }
