@@ -4,10 +4,10 @@
  */
 export function rafThrottle(fn) {
   let locked = false;
-  return function(...args) {
+  return function (...args) {
     if (locked) return;
     locked = true;
-    window.requestAnimationFrame(_ => {
+    window.requestAnimationFrame((_) => {
       fn.apply(this, args);
       locked = false;
     });
@@ -23,12 +23,12 @@ export function rafThrottle(fn) {
 export function formatTimeStamp(timestamp, fmt = 'yyyy-MM-dd hh:mm:ss') {
   // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
   let seconds = parseInt(timestamp, 10) || 0;
-  if (seconds && (seconds + '').length < 13) {
+  if (seconds && (`${seconds}`).length < 13) {
     seconds *= 1000;
   }
 
-  let date = new Date(seconds);
-  var o = {
+  const date = new Date(seconds);
+  const o = {
     // 月份
     'M+': date.getMonth() + 1,
     // 日
@@ -42,28 +42,28 @@ export function formatTimeStamp(timestamp, fmt = 'yyyy-MM-dd hh:mm:ss') {
     // 季度
     'q+': Math.floor((date.getMonth() + 3) / 3),
     // 毫秒
-    'S': date.getMilliseconds()
+    S: date.getMilliseconds(),
   };
-  var week = {
+  const week = {
     0: '\u65e5', // Sunday
     1: '\u4e00', // Monday
     2: '\u4e8c', // Quesday
     3: '\u4e09', // Wednesday
     4: '\u56db', // Thurseday
     5: '\u4e94', // Friday
-    6: '\u516d'  // Saturday
+    6: '\u516d', // Saturday
   };
   if (/(y+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+    fmt = fmt.replace(RegExp.$1, (`${date.getFullYear()}`).substr(4 - RegExp.$1.length));
   }
 
   if (/(E+)/.test(fmt)) {
-    fmt = fmt.replace(RegExp.$1, ((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? '（\u661f\u671f' : '（\u5468') : '（')
-      + week[date.getDay() + ''] + '）');
+    fmt = fmt.replace(RegExp.$1, `${((RegExp.$1.length > 1) ? (RegExp.$1.length > 2 ? '（\u661f\u671f' : '（\u5468') : '（')
+      + week[`${date.getDay()}`]}）`);
   }
-  for (var k in o) {
-    if (new RegExp('(' + k + ')').test(fmt)) {
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : (('00' + o[k]).substr(('' + o[k]).length)));
+  for (const k in o) {
+    if (new RegExp(`(${k})`).test(fmt)) {
+      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (o[k]) : ((`00${o[k]}`).substr((`${o[k]}`).length)));
     }
   }
   return fmt;
@@ -97,9 +97,9 @@ export function downloadFile(url, name = '') {
  * @desc check if text-overflow happened in dom
  */
 export function isEllipsis(dom) {
-  let checkDom = dom.cloneNode();
-  checkDom.style.width = dom.offsetWidth + 'px';
-  checkDom.style.height = dom.offsetHeight + 'px';
+  const checkDom = dom.cloneNode();
+  checkDom.style.width = `${dom.offsetWidth}px`;
+  checkDom.style.height = `${dom.offsetHeight}px`;
   checkDom.style.overflow = 'auto';
   checkDom.style.position = 'absolute';
   checkDom.style.zIndex = -1;
@@ -107,9 +107,9 @@ export function isEllipsis(dom) {
   checkDom.style.whiteSpace = 'nowrap';
   checkDom.innerHTML = dom.innerHTML;
 
-  let parent = dom.parentNode;
+  const parent = dom.parentNode;
   parent.appendChild(checkDom);
-  let flag = checkDom.scrollWidth > checkDom.offsetWidth;
+  const flag = checkDom.scrollWidth > checkDom.offsetWidth;
   parent.removeChild(checkDom);
   return flag;
 }
@@ -119,11 +119,11 @@ export function isEllipsis(dom) {
  * @param {HTML Element} el
  */
 export function isElementOverflowed(el) {
-  var curOverflow = el.style.overflow;
+  const curOverflow = el.style.overflow;
   if (!curOverflow || curOverflow === 'visible') {
-     el.style.overflow = 'hidden';
+    el.style.overflow = 'hidden';
   }
-  var isOverflowing = el.clientWidth < el.scrollWidth || el.clientHeight < el.scrollHeight;
+  const isOverflowing = el.clientWidth < el.scrollWidth || el.clientHeight < el.scrollHeight;
   el.style.overflow = curOverflow;
 
   return isOverflowing;

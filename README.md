@@ -1,4 +1,32 @@
-# hello-world
+# mz-ui
+
+project created by mz-cli
+
+## Project Directorys
+
+```
+project
+|-- public
+|   |-- index.html
+|   └-- favicon.ico
+|-- src
+|   |-- api: for async request definitions
+|   |-- assets: for static file, eg. fonts, images, etc.
+|   |-- common: for global common files, eg. util, mixin, etc.
+|   |-- components: for universal components
+|   |-- router: for vue-router
+|   |-- store: for vuex
+|   └-- views: for page components
+|-- .browserslistrc: config for `browserslist`
+|-- .editorconfig: consistent coding styles config for various editors and IDEs
+|-- .eslintrc.js: eslint config, default: Airbnb style
+|-- .gitignore: ignore files/directorys
+|-- babel.config.js: babel config
+|-- package.json
+|-- postcss.config.js
+└-- README.md
+```
+
 
 ## Project setup
 ```
@@ -13,11 +41,6 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
 ```
 
 ### Lints and fixes files

@@ -38,19 +38,19 @@ export default {
     // current title
     title: {
       type: String,
-      default: ''
+      default: '',
     },
     // current active tab
     value: {},
     // tab list
     tabs: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   data() {
     return {
-      ro: ''
+      ro: '',
     };
   },
   watch: {
@@ -58,7 +58,7 @@ export default {
       this.$nextTick(() => {
         this.setCurrentTab();
       });
-    }
+    },
   },
   mounted() {
     this.setCurrentTab();
@@ -77,12 +77,12 @@ export default {
     // 设置当前激活的标签样式
     setCurrentTab() {
       if (this.tabs && this.tabs.length && this.$refs.tabWrapper && this.$refs.tabs) {
-        let activeBar = this.$refs.tabWrapper.querySelector('.tabs-bar .move-bar');
-        let tabs = this.$refs.tabs;
-        let activeNav = tabs.querySelector('li.is-active') || tabs.querySelector('li:first-child');
-        activeBar.style.width = (activeNav.clientWidth || 0) + 'px';
+        const activeBar = this.$refs.tabWrapper.querySelector('.tabs-bar .move-bar');
+        const { tabs } = this.$refs;
+        const activeNav = tabs.querySelector('li.is-active') || tabs.querySelector('li:first-child');
+        activeBar.style.width = `${activeNav.clientWidth || 0}px`;
         activeBar.style.transform = `translateX(${activeNav.offsetLeft}px)`;
-        let tabName = activeNav.getAttribute('tab-name');
+        const tabName = activeNav.getAttribute('tab-name');
         this.displayContent(tabName);
       }
     },
@@ -91,8 +91,8 @@ export default {
       if (tab.value === this.value) {
         return;
       }
-      let activeBar = this.$refs.tabWrapper.querySelector('.tabs-bar .move-bar');
-      activeBar.style.width = evt.target.clientWidth + 'px';
+      const activeBar = this.$refs.tabWrapper.querySelector('.tabs-bar .move-bar');
+      activeBar.style.width = `${evt.target.clientWidth}px`;
       activeBar.style.transform = `translateX(${evt.target.offsetLeft}px)`;
       this.$emit('input', tab.value);
       this.$emit('tab-click', tab, event);
@@ -102,7 +102,7 @@ export default {
       if (!this.$refs.tabs) {
         return;
       }
-      let contents = this.$refs.tabContent.children;
+      const contents = this.$refs.tabContent.children;
       for (let i = 0; i < contents.length; i++) {
         if (contents[i].getAttribute('tab-name') && contents[i].getAttribute('tab-name') !== tabName) {
           contents[i].style.display = 'none';
@@ -110,8 +110,8 @@ export default {
           contents[i].style.display = '';
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

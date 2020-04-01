@@ -24,20 +24,20 @@ export default {
     // default display image index
     current: {
       type: Number,
-      default: 0
+      default: 0,
     },
     // image list
     list: {
       type: Array,
-      default: []
+      default: [],
     },
     // viewer visible flag
     visible: {
       type: Boolean,
-      default: false
+      default: false,
     },
   },
-  data () {
+  data() {
     return {
       // image index of img viewer
       innerIndex: -1,
@@ -48,23 +48,23 @@ export default {
       deltaX: 0,
       deltaY: 0,
       // image scale ratio of each zoom
-      scaleRatio: 0.02
+      scaleRatio: 0.02,
     };
   },
   watch: {
     current(val) {
       this.reset();
       this.innerIndex = val;
-    }
+    },
   },
   computed: {
     imgStyle() {
       return {
         transform: `scale(${this.scale}) rotate(${this.rotate}deg)`,
         marginLeft: `${(this.translateX + this.deltaX) * 2}px`,
-        marginTop: `${(this.translateY + this.deltaY) * 2}px`
-      }
-    }
+        marginTop: `${(this.translateY + this.deltaY) * 2}px`,
+      };
+    },
   },
   mounted() {
     this.innerIndex = this.current;
@@ -93,7 +93,7 @@ export default {
         switch (code) {
           // ESC
           case 27:
-            this.closeViewer()
+            this.closeViewer();
             break;
           // LEFT ARROW
           case 37:
@@ -122,7 +122,7 @@ export default {
     },
     scaleImage(val) {
       if (val <= 0 && this.scale <= 0.2) {
-        return;
+
       } else {
         this.scale += val;
       }
@@ -159,7 +159,7 @@ export default {
       if (temp > this.list.length - 1) {
         temp = 0;
       }
-      if(this.innerIndex !== temp) {
+      if (this.innerIndex !== temp) {
         this.innerIndex = temp;
         const dom = document.querySelector('.mz-viewer > img');
         dom.style.visibility = 'hidden';
@@ -176,9 +176,9 @@ export default {
     closeViewer() {
       this.reset();
       this.$emit('update:visible', false);
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
