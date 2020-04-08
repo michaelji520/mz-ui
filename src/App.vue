@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="mz-ui">
-    <div class="navbar"></div>
+    <nav-bar></nav-bar>
     <div class="container">
       <div class="component-wrapper">
         <mz-tab title="多标签页示例" v-model="active" :tabs="tabs">
@@ -22,11 +22,12 @@
 <script>
 import MzTab from './components/mz-tab/mz-tab';
 import MzViewer from './components/mz-viewer/mz-viewer';
+import NavBar from './views/Navbar';
 
 export default {
   name: 'app',
   components: {
-    MzTab, MzViewer
+    MzTab, MzViewer, NavBar
   },
   data () {
     return {
@@ -58,7 +59,6 @@ export default {
   }
   .navbar {
     width: 160px;
-    background-color: #42C57A;
   }
   .container {
     display: flex;
