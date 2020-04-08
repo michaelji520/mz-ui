@@ -3,7 +3,7 @@ const execa = require('execa');
 // mock server list
 const mock = {
   localhost: 'http://localhost:9527',
-  server: 'your mock server address',
+  server: 'your mock server address'
 };
 
 // launch local mock server
@@ -22,8 +22,8 @@ module.exports = {
         target: mock.localhost,
         changeOrigin: true,
         secure: false,
-        ws: true,
-      },
-    },
-  },
+        ws: true
+      }
+    }
+  }
 };

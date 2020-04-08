@@ -4,7 +4,7 @@ import axios from 'axios';
  * @description send ajax request
  * @param {object} options
  */
-function send(options) {
+function send (options) {
   const { url } = options;
   if (!url) {
     return new Promise((resolve, reject) => {
@@ -29,7 +29,7 @@ function send(options) {
  * @param {string} api
  * @param {object} params
  */
-function get(api, params) {
+function get (api, params) {
   return send({ url: api, params: params || {} });
 }
 
@@ -38,7 +38,7 @@ function get(api, params) {
  * @param {string} api
  * @param {object} data
  */
-function post(api, data) {
+function post (api, data) {
   return send({ url: api, data: data || {} });
 }
 

@@ -24,20 +24,20 @@ export default {
     // default display image index
     current: {
       type: Number,
-      default: 0,
+      default: 0
     },
     // image list
     list: {
       type: Array,
-      default: [],
+      default: () => []
     },
     // viewer visible flag
     visible: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
-  data() {
+  data () {
     return {
       // image index of img viewer
       innerIndex: -1,
@@ -48,25 +48,25 @@ export default {
       deltaX: 0,
       deltaY: 0,
       // image scale ratio of each zoom
-      scaleRatio: 0.02,
+      scaleRatio: 0.02
     };
   },
   watch: {
-    current(val) {
+    current (val) {
       this.reset();
       this.innerIndex = val;
-    },
+    }
   },
   computed: {
-    imgStyle() {
+    imgStyle () {
       return {
         transform: `scale(${this.scale}) rotate(${this.rotate}deg)`,
         marginLeft: `${(this.translateX + this.deltaX) * 2}px`,
-        marginTop: `${(this.translateY + this.deltaY) * 2}px`,
+        marginTop: `${(this.translateY + this.deltaY) * 2}px`
       };
-    },
+    }
   },
-  mounted() {
+  mounted () {
     this.innerIndex = this.current;
     this.deviceSupportInstall();
     const dom = document.querySelector('.mz-viewer > img');
@@ -74,12 +74,12 @@ export default {
       dom.style.visibility = 'visible';
     };
   },
-  beforeDestory() {
+  beforeDestory () {
     this.deviceSupportUninstall();
   },
   methods: {
     // add support for mouse wheel & arrow keys
-    deviceSupportInstall() {
+    deviceSupportInstall () {
       this._mouseWheelHandler = rafThrottle((e) => {
         if (e && e.wheelDeltaY > 0) {
           this.scale += this.scaleRatio;
@@ -113,21 +113,21 @@ export default {
       });
       window.addEventListener('keydown', this._keyDownHandler);
     },
-    deviceSupportUninstall() {
+    deviceSupportUninstall () {
       window.removeEventListener('mousewheel', this._mouseWheelHandler);
       window.removeEventListener('keydown', this._keyDownHandler);
     },
-    rotateImage(val) {
+    rotateImage (val) {
       this.rotate += val;
     },
-    scaleImage(val) {
+    scaleImage (val) {
       if (val <= 0 && this.scale <= 0.2) {
 
       } else {
         this.scale += val;
       }
     },
-    move(e) {
+    move (e) {
       // 算出鼠标相对元素的位置
       const disX = e.clientX;
       const disY = e.clientY;
@@ -150,7 +150,7 @@ export default {
         document.onmouseup = null;
       };
     },
-    changeImg(num) {
+    changeImg (num) {
       this.reset();
       let temp = this.innerIndex + num;
       if (temp < 0) {
@@ -165,7 +165,7 @@ export default {
         dom.style.visibility = 'hidden';
       }
     },
-    reset() {
+    reset () {
       this.scale = 1;
       this.rotate = 0;
       this.translateX = 0;
@@ -173,11 +173,11 @@ export default {
       this.deltaX = 0;
       this.deltaY = 0;
     },
-    closeViewer() {
+    closeViewer () {
       this.reset();
       this.$emit('update:visible', false);
-    },
-  },
+    }
+  }
 };
 </script>
 

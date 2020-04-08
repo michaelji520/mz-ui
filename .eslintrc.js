@@ -1,19 +1,24 @@
 module.exports = {
-  root: true,
   env: {
-    es6: true,
-    browser: true
+    browser: true,
+    es6: true
   },
   extends: [
     'plugin:vue/essential',
-    '@vue/airbnb',
+    'standard'
   ],
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'linebreak-style': 0,
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
   },
   parserOptions: {
-    parser: 'babel-eslint',
+    ecmaVersion: 2018,
+    sourceType: 'module'
   },
+  plugins: [
+    'vue'
+  ],
+  rules: {
+    semi: [2, 'always'] // 语句强制分号结尾
+  }
 };

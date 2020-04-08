@@ -26,26 +26,26 @@ import MzViewer from './components/mz-viewer/mz-viewer';
 export default {
   name: 'app',
   components: {
-    MzTab, MzViewer,
+    MzTab, MzViewer
   },
-  data() {
+  data () {
     return {
       active: 'first',
       tabs: [
         {
           label: 'tab 1',
-          value: 'first',
+          value: 'first'
         },
         {
           label: 'tab 2',
-          value: 'second',
-        },
+          value: 'second'
+        }
       ],
       currentImgIndex: 0,
       imgSrcList: ['https://static.zhangji.xyz/FsXIbP9YH809wcFKjcLvT1TYvKXN', 'https://static.zhangji.xyz/FqOUEtt6RZYuEQePwuarzpT8HIKh'],
-      viewerVisible: false,
+      viewerVisible: false
     };
-  },
+  }
 };
 </script>
 

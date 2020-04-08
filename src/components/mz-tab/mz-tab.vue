@@ -38,29 +38,29 @@ export default {
     // current title
     title: {
       type: String,
-      default: '',
+      default: ''
     },
     // current active tab
     value: {},
     // tab list
     tabs: {
       type: Array,
-      default: () => [],
-    },
+      default: () => []
+    }
   },
-  data() {
+  data () {
     return {
-      ro: '',
+      ro: ''
     };
   },
   watch: {
-    value() {
+    value () {
       this.$nextTick(() => {
         this.setCurrentTab();
       });
-    },
+    }
   },
-  mounted() {
+  mounted () {
     this.setCurrentTab();
     if (ResizeObserver) {
       this.ro = new ResizeObserver((entries) => {
@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     // 设置当前激活的标签样式
-    setCurrentTab() {
+    setCurrentTab () {
       if (this.tabs && this.tabs.length && this.$refs.tabWrapper && this.$refs.tabs) {
         const activeBar = this.$refs.tabWrapper.querySelector('.tabs-bar .move-bar');
         const { tabs } = this.$refs;
@@ -87,7 +87,7 @@ export default {
       }
     },
     // 切换标签页
-    switchTab(tab, evt) {
+    switchTab (tab, evt) {
       if (tab.value === this.value) {
         return;
       }
@@ -98,7 +98,7 @@ export default {
       this.$emit('tab-click', tab, event);
       this.displayContent(tab.value);
     },
-    displayContent(tabName) {
+    displayContent (tabName) {
       if (!this.$refs.tabs) {
         return;
       }
@@ -110,8 +110,8 @@ export default {
           contents[i].style.display = '';
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
