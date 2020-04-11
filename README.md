@@ -1,6 +1,9 @@
 # mz-ui
 
-project created by mz-cli
+我的个人Vue组件库
+
+- mz-tab 多标签页组件
+- mz-viewer 大图预览组件
 
 ## Project Directorys
 
